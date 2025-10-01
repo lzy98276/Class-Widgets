@@ -2178,7 +2178,7 @@ class SettingsMenu(FluentWindow):
                 with zip_ref.open('plugin.json') as f:
                     plugin_info = json.loads(f.read().decode('utf-8'))
                 plugin_name = plugin_info.get('name', self.tr('未知插件'))
-                plugin_dir_name = Path(zip_file_path).suffix
+                plugin_dir_name = plugin_info.get('url', '').split('/')[-1].replace('.git', '')
                 target_dir = PLUGIN_HOME / plugin_dir_name
                 if os.path.exists(target_dir):
                     reply = MessageBox(
